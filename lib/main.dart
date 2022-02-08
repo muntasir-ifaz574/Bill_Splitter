@@ -1,9 +1,55 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(const MaterialApp(
-      home: SplitBill(),
+      home: Splash(),
       debugShowCheckedModeBanner: false,
     ));
+
+class Splash extends StatefulWidget {
+  const Splash({Key? key}) : super(key: key);
+
+  @override
+  _SplashState createState() => _SplashState();
+}
+
+class _SplashState extends State<Splash> {
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration(seconds: 3), () {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => SplitBill(),
+        ),
+      );
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.blue.shade200,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              'assets/bill_splitting.png',
+              height: 130,
+            ),
+            CircularProgressIndicator(
+              color: Colors.white,
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
 
 class SplitBill extends StatefulWidget {
   const SplitBill({Key? key}) : super(key: key);
@@ -21,8 +67,19 @@ class _SplitBillState extends State<SplitBill> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: Colors.blueGrey,
+        title: Text(
+          'Bill Splitting',
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
       body: Container(
-        margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.1),
+        // margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.1),
         alignment: Alignment.center,
         color: Colors.white,
         child: ListView(
@@ -34,19 +91,22 @@ class _SplitBillState extends State<SplitBill> {
               width: 150,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(30),
-                color: Colors.blue.shade300,
+                color: Colors.blue.shade400,
               ),
               child: Column(
                 children: [
-                  Text(
-                    "Total per Person",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 15,
+                  Padding(
+                    padding: const EdgeInsets.all(18),
+                    child: Text(
+                      "Total per Person",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                      ),
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(50),
+                    padding: const EdgeInsets.all(0),
                     child: Text(
                       "${personAmt.toStringAsFixed(2)}",
                       style: TextStyle(
@@ -66,7 +126,7 @@ class _SplitBillState extends State<SplitBill> {
                     prefixIcon: Icon(Icons.attach_money),
                     prefixText: "Bill Amount: ",
                     prefixStyle: TextStyle(
-                      color: Colors.grey.shade400,
+                      color: Colors.grey,
                       fontSize: 20,
                     ),
                   ),
