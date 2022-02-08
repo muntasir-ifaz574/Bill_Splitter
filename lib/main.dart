@@ -39,7 +39,7 @@ class _SplashState extends State<Splash> {
           children: [
             Image.asset(
               'assets/bill_splitting.png',
-              height: 130,
+              height: 250,
             ),
             CircularProgressIndicator(
               color: Colors.white,
@@ -79,7 +79,6 @@ class _SplitBillState extends State<SplitBill> {
         ),
       ),
       body: Container(
-        // margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.1),
         alignment: Alignment.center,
         color: Colors.white,
         child: ListView(
@@ -122,6 +121,7 @@ class _SplitBillState extends State<SplitBill> {
               children: [
                 TextField(
                   keyboardType: TextInputType.numberWithOptions(decimal: true),
+                  style: TextStyle(color: Colors.grey),
                   decoration: InputDecoration(
                     prefixIcon: Icon(Icons.attach_money),
                     prefixText: "Bill Amount: ",
